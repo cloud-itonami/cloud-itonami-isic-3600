@@ -1,0 +1,8 @@
+{:itonami.blueprint/id "cloud-itonami-3600"
+ :itonami.blueprint/name "Community Water Safety Operations"
+ :itonami.blueprint/isic-rev5 "3600"
+ :itonami.blueprint/domain :water/safety-operations
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:public-health :resilience :infrastructure]
+ :itonami.blueprint/governor :water-safety-governor
+ :itonami.blueprint/status :public-oss}
