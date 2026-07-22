@@ -69,7 +69,29 @@
           :required-evidence ["Anlagenregistrierung (site-intake record)"
                               "Sensorkalibrierungsnachweis (sensor-calibration-provenance certificate)"
                               "Laborergebniskettennachweis (lab-result-chain-of-custody record)"
-                              "Veröffentlichungsquellendokument (public-reporting-source document)"]}})
+                              "Veröffentlichungsquellendokument (public-reporting-source document)"]}
+   ;; FRA citations independently fetched+read from legifrance.gouv.fr
+   ;; (2026-07-22): Art. R1321-2 sets quality limits "définies par arrêté du
+   ;; ministre chargé de la santé" (in effect since 01/01/2023); Art. L1321-4
+   ;; ("en vigueur depuis" 24 décembre 2022) obliges every "fournisseur d'eau"
+   ;; to self-monitor quality, submit to contrôle sanitaire, take corrective
+   ;; measures and inform consumers of any health risk; Art. R1321-15 (in
+   ;; effect since 01/01/2023) states the contrôle sanitaire mentioned in
+   ;; L1321-4 "est exercé par l'agence régionale de santé". Chapter title
+   ;; verbatim from the Légifrance section page: "Chapitre Ier : Eaux
+   ;; potables (Articles R1321-1 à D1321-106)". Higher-level Livre/Titre
+   ;; numbering was NOT independently confirmed (the whole-code
+   ;; table-of-contents fetch exceeded the fetch tool's size limit) so it
+   ;; is deliberately omitted here rather than guessed.
+   "FRA" {:name "France"
+          :owner-authority "Agences Régionales de Santé (ARS, contrôle sanitaire) / Ministère chargé de la Santé (limites de qualité par arrêté)"
+          :legal-basis "Code de la santé publique, Chapitre Ier \"Eaux potables\" (Art. L.1321-4, R.1321-1 et suivants)"
+          :national-spec "Limites et références de qualité microbiologiques et physico-chimiques fixées par arrêté du ministre chargé de la santé (Art. R.1321-2) ; obligations du fournisseur d'eau -- auto-surveillance, contrôle sanitaire, mesures correctives et information des consommateurs en cas de risque sanitaire (Art. L.1321-4) ; contrôle sanitaire exercé par l'agence régionale de santé (Art. R.1321-15)"
+          :provenance "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072665/LEGISCTA000006178501/"
+          :required-evidence ["Enregistrement de l'installation (site-intake record)"
+                              "Certificat d'étalonnage des capteurs (sensor-calibration-provenance certificate)"
+                              "Chaîne de traçabilité des résultats d'analyse (lab-result-chain-of-custody record)"
+                              "Document source d'information des consommateurs (public-reporting-source document)"]}})
 
 (defn spec-basis
   "The jurisdiction's requirement map, or nil -- nil means NO spec-basis,
