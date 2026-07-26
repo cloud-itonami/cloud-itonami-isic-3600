@@ -11,7 +11,8 @@
   was hand-typed boilerplate copied from an unrelated robotics-mission
   console (title 'cloud-itonami · robotics', rows 'M1'/'robot-1') and
   never adapted to this repo's own water-utility domain."
-  (:require [clojure.string :as str]
+  (:require [jp-go-dds.skin]
+            [clojure.string :as str]
             [water.store :as store]
             [water.operation :as op]
             [water.phase :as phase]
@@ -268,7 +269,9 @@ code { font-size: 12px; background: #f4f4f4; padding: 1px 4px; border-radius: 3p
     (str
      "<!doctype html>\n<html lang=\"ja\">\n<head>\n<meta charset=\"utf-8\">\n"
      "<title>water.render-html -- Water Utility Governor operator console</title>\n"
-     "<style>\n" css "\n</style>\n</head>\n<body>\n"
+     "<style>"
+   (jp-go-dds.skin/dds+skin)
+   "</style>\n</head>\n<body>\n"
      "<header class=\"bar\"><h1>Water Utility Governor -- Operator Console</h1>"
      "<span class=\"badge\">ISIC 3600 &middot; water collection, treatment and supply &middot; phase "
      (:phase operator) "</span></header>\n<main>\n"
