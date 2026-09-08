@@ -12,7 +12,7 @@
   console (title 'cloud-itonami · robotics', rows 'M1'/'robot-1') and
   never adapted to this repo's own water-utility domain."
   (:require [jp-go-dds.skin]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [water.store :as store]
             [water.operation :as op]
             [water.phase :as phase]
