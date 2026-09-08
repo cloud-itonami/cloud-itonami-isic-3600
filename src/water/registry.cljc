@@ -23,7 +23,7 @@
   suppressing the alert itself (that is `water.operation`'s `:report/
   publish`/`:alert/suppress`, always human-gated -- see README
   `Actuation`)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn- unsigned-certificate
   "Every certificate this actor produces is UNSIGNED -- signature is the
@@ -66,7 +66,7 @@
     (throw (ex-info "report-publication: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "report-publication: sequence must be >= 0" {})))
-  (let [report-number (str (str/upper-case jurisdiction) "-RPT-" (zero-pad sequence 6))
+  (let [report-number (str (str/upper jurisdiction) "-RPT-" (zero-pad sequence 6))
         record {"record_id" report-number
                 "kind" "report-publication-draft"
                 "site_id" site-id
@@ -94,7 +94,7 @@
     (throw (ex-info "alert-suppression: jurisdiction required" {})))
   (when (< sequence 0)
     (throw (ex-info "alert-suppression: sequence must be >= 0" {})))
-  (let [suppression-number (str (str/upper-case jurisdiction) "-SUP-" (zero-pad sequence 6))
+  (let [suppression-number (str (str/upper jurisdiction) "-SUP-" (zero-pad sequence 6))
         record {"record_id" suppression-number
                 "kind" "alert-suppression-draft"
                 "site_id" site-id
