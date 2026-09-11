@@ -138,16 +138,16 @@ a human.
 ## Run
 
 ```bash
-clojure -M:dev:run     # walk one clean dual-actuation lifecycle + four HARD-hold cases through the actor
-clojure -M:dev:test    # governor contract · phase invariants · store parity · registry conformance · facts coverage
-clojure -M:lint        # clj-kondo (errors fail; CI mirrors this)
+kbb -M:dev:run     # walk one clean dual-actuation lifecycle + four HARD-hold cases through the actor
+kbb -M:dev:test    # governor contract · phase invariants · store parity · registry conformance · facts coverage
+kbb -M:lint        # clj-kondo (errors fail; CI mirrors this)
 ```
 
 A live sample of the operator console is rendered at build time by
 actually running the real actor stack (`water.render-html`, driving
 `water.operation`'s StateGraph against a seeded `water.store`) into
 [docs/samples/operator-console.html](docs/samples/operator-console.html)
--- `clojure -M:dev:render-html`, regenerated nightly (and on demand) by
+-- `kbb -M:dev:render-html`, regenerated nightly (and on demand) by
 [`.github/workflows/regenerate.yml`](.github/workflows/regenerate.yml),
 which commits only when the output actually changed.
 
@@ -203,7 +203,7 @@ stack only -- no bespoke domain capability lib to reference at all.
 | `src/water/phase.cljk` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (both report publication and alert suppression always human; site intake is the ONLY auto-eligible op, no direct capital risk) |
 | `src/water/operation.cljk` | **OperationActor** -- langgraph-clj StateGraph |
 | `src/water/sim.cljk` | demo driver |
-| `src/water/render_html.cljk` | build-time renderer for `docs/samples/operator-console.html` -- drives the real actor, no invented numbers (`clojure -M:dev:render-html`) |
+| `src/water/render_html.cljk` | build-time renderer for `docs/samples/operator-console.html` -- drives the real actor, no invented numbers (`kbb -M:dev:render-html`) |
 | `test/water/*_test.clj` | governor contract · phase invariants · store parity · registry conformance · facts coverage |
 
 ## Business-process coverage (honest)
