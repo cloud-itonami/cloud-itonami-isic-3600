@@ -1,5 +1,5 @@
 (ns water.sim
-  "Demo driver -- `clojure -M:dev:run`. Walks a clean site through
+  "Demo driver -- `kbb -M:dev:run`. Walks a clean site through
   intake -> jurisdiction assessment -> threshold-breach screening ->
   report-publication proposal (always escalates) -> human approval ->
   commit, then through alert-suppression proposal (always escalates)
