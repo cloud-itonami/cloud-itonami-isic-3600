@@ -189,7 +189,7 @@ already established for that sibling's own ID field.
   modeling contribution: the first unconditional-evaluation grounding
   for a threshold-breach concept.
 - (+) The actuation invariant (governor + phase, two layers) is
-  regression-tested by `test/water/phase_test.clj`'s `report-publish-
+  regression-tested by `test/water/phase_test.cljk`'s `report-publish-
   never-auto-at-any-phase`/`alert-suppress-never-auto-at-any-phase`.
 - (+) `MemStore` ‖ `DatomicStore` parity is proven by `test/water/
   store_contract_test.clj`, the same `:db-api`-driven swap pattern

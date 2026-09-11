@@ -94,7 +94,7 @@ independent layers enforce this (`water.governor`'s `:actuation/
 publish-report`/`:actuation/suppress-alert` high-stakes gate and
 `water.phase`'s phase table, which never puts `:report/publish`/
 `:alert/suppress` in any phase's `:auto` set) -- see `water.phase`'s
-docstring and `test/water/phase_test.clj`'s `report-publish-never-
+docstring and `test/water/phase_test.cljk`'s `report-publish-never-
 auto-at-any-phase`/`alert-suppress-never-auto-at-any-phase`. The actor
 may draft, check and recommend; a human utility officer is always the
 one who actually publishes a report or suppresses an alert. Like
@@ -195,15 +195,15 @@ stack only -- no bespoke domain capability lib to reference at all.
 
 | File | Role |
 |---|---|
-| `src/water/store.cljc` | **Store** protocol -- `MemStore` ‖ `DatomicStore` (`langchain.db`) + append-only audit ledger + separate report-publication/alert-suppression history. No dynamically-filed sub-record -- both actuation ops act directly on a pre-seeded site, and the double-actuation guards check dedicated `:report-published?`/`:alert-suppressed?` booleans rather than a `:status` value |
-| `src/water/registry.cljc` | Report-publication + alert-suppression draft records, plus `contaminant-level-out-of-range?` -- the THIRD instance of this fleet's two-sided range check family (`testlab`/`conservation` established the first two) |
-| `src/water/facts.cljc` | Per-jurisdiction drinking-water-safety catalog with an official spec-basis citation per entry, honest coverage reporting |
-| `src/water/wateradvisor.cljc` | **Water Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/threshold-breach-screening/report-publication/alert-suppression proposals |
-| `src/water/governor.cljc` | **Water Safety Governor** -- 4 HARD checks (spec-basis · evidence-incomplete · contaminant-level-out-of-range, pure ground-truth two-sided-range recompute · threshold-breach-unresolved, unconditional evaluation, the TWENTY-FIFTH grounding of this discipline and FIRST specifically for the threshold-breach concept) + already-published/already-suppressed guards + 1 soft (confidence/actuation gate) |
-| `src/water/phase.cljc` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (both report publication and alert suppression always human; site intake is the ONLY auto-eligible op, no direct capital risk) |
-| `src/water/operation.cljc` | **OperationActor** -- langgraph-clj StateGraph |
-| `src/water/sim.cljc` | demo driver |
-| `src/water/render_html.clj` | build-time renderer for `docs/samples/operator-console.html` -- drives the real actor, no invented numbers (`clojure -M:dev:render-html`) |
+| `src/water/store.cljk` | **Store** protocol -- `MemStore` ‖ `DatomicStore` (`langchain.db`) + append-only audit ledger + separate report-publication/alert-suppression history. No dynamically-filed sub-record -- both actuation ops act directly on a pre-seeded site, and the double-actuation guards check dedicated `:report-published?`/`:alert-suppressed?` booleans rather than a `:status` value |
+| `src/water/registry.cljk` | Report-publication + alert-suppression draft records, plus `contaminant-level-out-of-range?` -- the THIRD instance of this fleet's two-sided range check family (`testlab`/`conservation` established the first two) |
+| `src/water/facts.cljk` | Per-jurisdiction drinking-water-safety catalog with an official spec-basis citation per entry, honest coverage reporting |
+| `src/water/wateradvisor.cljk` | **Water Advisor** -- `mock-advisor` ‖ `llm-advisor`; intake/assessment/threshold-breach-screening/report-publication/alert-suppression proposals |
+| `src/water/governor.cljk` | **Water Safety Governor** -- 4 HARD checks (spec-basis · evidence-incomplete · contaminant-level-out-of-range, pure ground-truth two-sided-range recompute · threshold-breach-unresolved, unconditional evaluation, the TWENTY-FIFTH grounding of this discipline and FIRST specifically for the threshold-breach concept) + already-published/already-suppressed guards + 1 soft (confidence/actuation gate) |
+| `src/water/phase.cljk` | **Phase 0→3** -- read-only → assisted intake → assisted assess → supervised (both report publication and alert suppression always human; site intake is the ONLY auto-eligible op, no direct capital risk) |
+| `src/water/operation.cljk` | **OperationActor** -- langgraph-clj StateGraph |
+| `src/water/sim.cljk` | demo driver |
+| `src/water/render_html.cljk` | build-time renderer for `docs/samples/operator-console.html` -- drives the real actor, no invented numbers (`clojure -M:dev:render-html`) |
 | `test/water/*_test.clj` | governor contract · phase invariants · store parity · registry conformance · facts coverage |
 
 ## Business-process coverage (honest)
