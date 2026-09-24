@@ -1,0 +1,44 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README "Robotics premise": a sampling and valve robot performs water
+;; sampling, valve actuation and leak survey at treatment and distribution
+;; points under the actor, gated by the independent Water Safety Governor
+;; (work near sources, treatment chemicals or public supply needs human
+;; sign-off). The physical work: the sampling robot climbing the reservoir
+;; embankment path with its sample coolers, the distribution main the leak
+;; survey walks, and draining a sedimentation-basin bay for sludge removal.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-3600"
+ :cases
+ [{:id :sampling-run-up-embankment
+   :kind :transport
+   :procedure "sampling robot carries its sample coolers up the 10-degree reservoir embankment path to the intake sampling point (60 m)"
+   :params {:mass-kg 60.0 :distance-m 60.0 :v-max-mps 0.8 :a-max-mps2 0.3
+            :brake-decel-mps2 0.6 :drive-force-n 250.0 :crr 0.03 :slope-deg 10.0
+            :cog-height-m 0.35 :support-half-length-m 0.35 :payload-cog-height-m 0.60
+            :max-time-s 1800.0}
+   :sweep {:param :payload-kg :values [10.0 20.0 30.0 45.0 60.0]}
+   :quantity :cycle-time-s
+   :limit {:max 90.0 :basis "estimate: the sample has to reach the cooler on the crest within the 90-second walk budget of the sampling round"}
+   :boundary {:lo 1.0 :hi 120.0}}
+  {:id :distribution-main-headloss
+   :kind :pipe-flow
+   :procedure "treated water flows along a 1 km DN150 ductile-iron distribution main that the leak-survey robot walks, at the district's hourly demand"
+   :params {:diameter-m 0.150 :length-m 1000.0 :roughness-m 1.0e-4
+            :density-kg-m3 999.0 :viscosity-pa-s 1.14e-3 :pump-efficiency 0.75 :elevation-m 0.0}
+   :sweep {:param :q-m3s :values [0.005 0.010 0.015 0.020 0.030]}
+   :quantity :head-m
+   :limit {:max 5.0 :basis "estimate: a 5 m/km friction-head design ceiling so the district keeps service pressure at peak hour"}
+   :boundary {:lo 0.001 :hi 0.06}}
+  {:id :drain-sedimentation-bay
+   :kind :tank-drain
+   :procedure "one sedimentation-basin bay (20 m x 5 m, 3.5 m water depth) drains through its bottom washout valve to the sludge line before desludging"
+   :params {:tank-area-m2 100.0 :h0-m 3.5 :h-target-m 0.2 :cd 0.60 :dt-s 1.0 :max-time-s 172800.0}
+   :sweep {:param :orifice-area-m2 :values [0.018 0.031 0.049 0.071 0.126]}
+   :quantity :time-to-target-s
+   :limit {:max 7200.0 :basis "estimate: the bay must be drained within 2 hours to keep the planned desludging shift"}
+   :boundary {:lo 0.005 :hi 0.3}}]}
