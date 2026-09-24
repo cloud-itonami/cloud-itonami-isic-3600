@@ -1,5 +1,5 @@
 (ns water.registry-test
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [water.registry :as r]))
 
 ;; ----------------------------- contaminant-level-out-of-range? -----------------------------
